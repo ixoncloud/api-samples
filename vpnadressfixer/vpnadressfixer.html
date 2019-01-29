@@ -1,0 +1,452 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>VPN Adress Fixer</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/getmdl-select@2.0.1/getmdl-select.min.css">
+    <style>
+        .mdl-layout__header-row {
+            padding-left: 16px;
+        }
+
+        .page-content {
+            height: 90vh;
+        }
+
+        .dash-card {
+            margin: 20px;
+        }
+
+        .mdl-card__supporting-text {
+            height: 100%;
+            width: 100%;
+        }
+
+        .agentTable {
+            width: 100%;
+        }
+
+        .agentTableContainer {
+            width: 100%;
+            overflow-y: auto;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <svg xmlns="http://www.w3.org/2000/svg" height="50%" style="margin-right: 16px;"
+                 viewBox="0 0 184 184" version="1.1">
+                <defs></defs>
+                <g id="Logos" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="Logo-symbol-white" transform="translate(-20.000000, -20.000000)" fill="#FFFFFF">
+                        <path d="M186.41501,179.605101 C184.058874,182.5053 181.557383,184.828229 179.835271,186.272099 C179.718987,186.157198 179.602703,186.061679 179.476729,185.945394 L166.529054,174.170169 C169.69641,171.28935 172.441544,168.398841 174.343619,166.351398 L185.051441,178.158462 L185.769911,178.886627 L186.41501,179.605101 Z M149.249799,197.213949 L146.461751,197.213949 C140.367913,197.076899 134.294841,195.821299 128.57062,193.585585 C126.257398,192.51964 123.037438,190.620321 118.971649,187.919467 L119.002104,187.887627 L114.810342,184.965279 C102.928604,176.660603 88.5661403,165.243923 82.440463,160.31566 C85.2908064,157.645262 89.6846821,153.510228 93.043076,150.29163 L93.7823103,149.74343 L93.8667547,149.563465 C95.4933469,148.044841 96.7807774,147.061957 97.0133455,146.915216 C100.129481,144.794402 105.167072,142.251364 111.557157,142.082474 L112.264552,142.071399 C119.529536,142.071399 125.508474,145.584863 129.078671,148.433841 C129.500892,148.771621 129.934189,149.173081 130.377176,149.61607 L130.852002,150.028605 C139.512395,158.373427 147.87654,166.235113 156.304364,174.012354 L156.283599,174.033119 L162.578165,179.751841 L174.163656,190.261776 C169.833459,192.709295 160.846364,196.898318 149.249799,197.213949 Z M99.7183339,191.517376 C92.134953,195.115284 84.2663994,196.950924 76.3992301,196.950924 L76.3770807,196.950924 C64.3596786,196.950924 55.011272,192.772975 50.2270142,190.081812 C53.7764462,186.885363 58.2547663,182.76971 61.3916668,179.920731 L64.2946149,177.240643 L65.1196778,176.523553 C68.7424795,173.199744 72.7764284,169.453711 77.4125625,165.073649 C82.4501534,169.147771 95.0918901,179.224407 106.66769,187.591378 C104.216035,189.090622 101.851592,190.419591 99.7183339,191.517376 Z M37.6074268,179.635557 C38.3992658,178.813257 39.1398844,178.010337 39.8666597,177.229568 C40.0881531,176.987308 40.3428705,176.724282 40.5643639,176.502787 L43.4894614,173.2302 L49.8587814,166.161742 C52.9306183,169.506316 55.7629653,172.20717 57.7688651,174.042809 C54.3260268,177.208803 48.4121526,182.611895 44.3989687,186.209803 C41.1236348,183.698604 38.926697,181.27185 37.6074268,179.635557 Z M31.8416763,125.146417 C32.9699084,122.941158 34.2379582,120.662529 35.6222921,118.340985 C42.0317578,127.753135 49.8684718,137.450461 58.5717787,146.798932 C54.3149521,151.304969 50.6298554,155.272497 47.3766708,158.785961 L37.3430191,169.960381 L35.5586127,171.944145 C35.2526749,172.27085 34.9038228,172.640469 34.57712,172.989324 C34.3016376,173.273114 34.0579948,173.547214 33.7742064,173.843464 C29.7610226,166.721017 21.5020868,147.748591 31.8416763,125.146417 Z M33.5831683,50.1136215 L43.6804995,61.1828311 L47.1330281,64.9703946 C47.5566342,65.4452244 47.9885464,65.899289 48.4121526,66.3741188 L49.7424974,67.830448 L49.7632624,67.8193733 C57.7259507,76.5033593 65.8367628,85.1139751 74.391946,93.9447015 C76.8629819,96.8476696 81.0464388,102.998307 81.2776226,111.387428 C81.57387,120.219539 76.6940932,127.214626 73.8852798,130.465064 L70.6528603,133.841478 L70.6957746,133.894083 C68.0863053,136.615702 65.6041947,139.297175 63.1968381,141.849904 C53.4912735,131.382884 44.9263999,120.472874 38.3037468,110.120754 L36.9844766,108.06362 L36.5733294,107.32438 C34.9245878,104.655366 33.4668843,102.102637 32.2528235,99.7810932 C21.2902837,76.8411391 29.3595657,57.6486025 33.5831683,50.1136215 Z M74.6452791,26.7639017 L77.4540925,26.7639017 C83.5174748,26.8995674 89.6002377,28.1565512 95.3452232,30.3922657 C98.3769143,31.7849152 103.035198,34.6657337 109.159491,38.9392017 C121.041228,47.2535681 135.414767,58.6605575 141.519679,63.5777452 L130.557139,73.929865 L130.49346,74.0032352 C128.814263,75.5966144 127.345485,76.7040891 126.913572,77.0737088 C122.350808,80.1331076 117.459957,81.7583268 112.360071,81.8953767 L111.673441,81.9064515 C103.795197,81.9064515 97.4577167,77.7174284 94.5852239,75.4166497 C85.3323364,66.4696385 76.4836745,58.1220479 67.6128631,49.954422 L67.6433185,49.9350412 L65.3937759,47.9194372 C65.1833572,47.7297822 64.9715541,47.5498176 64.7708257,47.3490878 L62.2679501,45.0815333 C61.3072224,44.205244 60.2302107,43.2126698 59.0784449,42.18964 L49.8477068,33.6745439 C54.2208174,31.2048753 63.1968381,27.079532 74.6452791,26.7639017 Z M124.272263,32.3663394 C131.866719,28.7781214 139.722814,26.9743219 147.623207,26.9743219 C159.683523,26.9743219 169.07346,31.1744197 173.762199,33.8115939 C170.371965,36.859918 166.159437,40.7333108 163.043302,43.5601399 L160.993103,45.4497686 C160.370153,46.0311929 159.853796,46.5046383 159.473105,46.8438024 C159.114562,47.1801979 158.902759,47.3601625 158.881994,47.3698529 L155.956897,49.9765715 L156.009501,50.0084114 C153.442946,52.3617951 150.675663,54.957439 147.623207,57.816108 L147.623207,57.8064176 L146.504665,58.8820524 C141.403395,54.7677839 128.782423,44.721604 117.217698,36.3864726 C117.375512,36.2798781 117.534711,36.174668 117.692525,36.0805327 C119.994672,34.6768085 122.255289,33.4101343 124.272263,32.3663394 Z M186.109072,44.5430237 C185.559492,45.1438288 185.009911,45.7238686 184.48248,46.2831434 C184.122553,46.6735282 183.764011,47.0652974 183.415159,47.4446075 L182.602555,48.3513524 L174.111051,57.763503 C171.028139,54.4078546 168.195792,51.6751608 166.200967,49.8602866 L167.626831,48.5423918 C170.741582,45.7031035 175.008099,41.7992552 178.398333,38.7495467 C178.79979,38.379927 179.201246,38.0324568 179.581938,37.694677 C182.855888,40.1948012 185.073591,42.6437046 186.362405,44.2786142 C186.277961,44.3727495 186.193517,44.447504 186.109072,44.5430237 Z M192.128156,98.7359139 C190.988849,100.961938 189.709725,103.273792 188.304626,105.616101 C181.86332,96.1831847 174.026606,86.4747846 165.345449,77.1678441 C168.576484,73.7499003 171.471126,70.6475868 174.090286,67.7986081 L174.111051,67.8193733 L176.962779,64.6741451 L178.525691,62.9866306 L178.504926,62.9658654 L178.75826,62.6903811 L178.779025,62.7014558 L178.75826,62.6903811 L178.810864,62.6280856 L178.842704,62.6488508 L178.821939,62.6280856 L188.45275,51.9921755 C189.00233,51.3692209 189.594825,50.736576 190.185936,50.1039311 C194.240649,57.2457586 202.43729,76.240334 192.128156,98.7359139 Z M44.8198062,52.3728699 L38.7481179,45.6726479 L38.3577358,45.2808788 C38.0822533,44.9638641 37.7873902,44.6593086 37.5022175,44.3630591 C39.8569693,41.4407102 42.3709196,39.1496219 44.0819563,37.694677 L54.5267552,47.1801979 C55.1386308,47.7408569 55.740816,48.2876726 56.3111615,48.8164917 C56.6807787,49.1431968 57.0503958,49.4920513 57.3895576,49.7979912 C54.2305078,52.6774254 51.453534,55.5790091 49.5846833,57.6043035 L44.8198062,52.3728699 Z M161.521919,169.590761 C152.777082,161.582335 144.116689,153.436858 135.182199,144.794402 L134.780742,144.435858 C134.32668,144.023323 133.894768,143.653703 133.418557,143.221788 C128.857177,139.62388 121.49529,135.297807 112.264552,135.297807 L111.397959,135.329647 C103.330061,135.540067 97.0784092,138.694986 93.3393235,141.22695 C92.8963366,141.502434 90.9416572,143.043208 88.7987084,145.047737 L88.3529529,145.469962 L88.3529529,145.490727 C83.136783,150.376075 76.3770807,156.813272 75.1740946,157.888906 L75.0896503,158.025956 L72.2060828,160.696355 C68.7521699,163.956483 65.626344,166.858067 62.785691,169.464786 C60.8102466,167.680367 57.7259507,164.748328 54.4201615,161.12827 C57.1140752,158.226686 60.0931616,155.039928 63.4404809,151.494624 L63.4723206,151.516774 L65.9212071,148.878215 L65.9212071,148.867141 C65.9641215,148.824226 65.9848865,148.803461 66.0167262,148.761931 L67.0522079,147.705677 L67.0411332,147.653072 C70.1683434,144.298808 73.463058,140.795034 76.8629819,137.176361 L78.3635998,135.635587 L78.3635998,135.581597 L78.9021057,135.034782 C82.461228,130.887289 88.4180166,122.319588 88.0470151,111.186698 C87.752152,100.751518 82.6287324,93.1653162 79.4406116,89.3971335 C70.5794906,80.2590829 62.2887151,71.4809615 54.1889777,62.6488508 C56.0259888,60.613866 58.9940005,57.4478727 62.4160738,54.3760147 C71.4557739,62.6903811 80.4857836,71.1750216 90.1069039,80.4293571 C93.888904,83.5316706 101.682704,88.6689689 111.673441,88.6689689 L112.560799,88.6592785 C118.960574,88.4696234 125.043337,86.4858594 131.04304,82.4117368 C131.527557,82.0435015 132.848212,80.9983222 134.750286,79.2263627 L146.863208,67.8512132 L148.193552,66.4793289 L148.320911,66.4585637 L150.876391,64.1577851 L150.854242,64.10518 C154.699922,60.4657413 158.10123,57.2886732 161.195216,54.4396945 C163.158201,56.2227288 166.232807,59.1561524 169.527521,62.7762104 C166.178818,66.4170334 162.420351,70.4786969 157.962796,75.1204003 L156.938389,76.2181846 L156.949464,76.240334 C153.812564,79.5959824 150.474935,83.1509762 146.958727,86.8859346 L145.004047,88.9541436 C141.456,93.0697965 135.540741,101.594583 135.836988,112.800843 C136.174766,123.258173 141.31895,130.823609 144.518146,134.580717 C153.358502,143.728458 161.448549,152.296159 169.749015,161.329 C167.900929,163.365369 164.943992,166.520287 161.521919,169.590761 Z M190.375589,173.716104 L174.195495,156.137712 L174.17473,156.158477 C166.021004,147.326366 158.10123,138.884641 149.525282,130.022074 C147.063936,127.130181 142.891554,121.009999 142.617456,112.601497 C142.375197,103.705707 147.22175,96.7410751 150.031948,93.4823308 L151.827429,91.6023925 L151.889724,91.5290223 L151.911873,91.5290223 C154.93249,88.3007336 157.878352,85.1665801 160.719005,82.1279464 C170.414879,92.5409773 178.990828,103.452372 185.612096,113.793417 L186.711258,115.523846 L186.711258,115.555686 L187.249763,116.473506 C188.938651,119.217274 190.439269,121.833683 191.685169,124.218907 C202.467745,146.789241 194.78054,165.792123 190.375589,173.716104 Z M195.201377,178.950307 C199.690772,171.711575 211.053384,149.015265 197.726402,121.178889 C196.353143,118.583245 194.810995,115.829786 192.88954,112.685942 L192.497773,112.062988 L192.550378,111.757048 L192.529613,111.715517 C194.662871,108.264349 196.584327,104.908701 198.210919,101.690103 C210.811126,74.1928902 199.004142,51.4010608 195.075403,45.0704586 C194.810995,44.6053192 194.505057,44.1512546 194.219884,43.7082647 L193.776898,43.064545 C193.733983,43.0133243 193.670304,42.9178046 193.628774,42.8651996 L193.544329,42.7586051 C192.88954,41.6718956 189.203058,35.9434827 181.399569,30.6774405 L181.229295,30.5500809 L180.595271,30.1181657 C177.722778,28.1344017 165.155795,20.189655 147.623207,20.189655 C138.730246,20.189655 129.8802,22.2149494 121.284871,26.3306023 C119.002104,27.4699169 116.637662,28.8099613 114.239996,30.2870556 C113.300033,30.8158748 112.348996,31.4056051 111.19723,32.1337697 C105.621133,28.3032916 101.217567,25.6661174 98.0072972,24.1890231 C91.3320394,21.5823045 84.4782025,20.1675055 77.5385368,20 L74.5511444,20 C59.9228886,20.41115 48.8966694,26.2669225 44.3878941,29.0729865 C43.7857088,29.4647557 43.1738333,29.8662153 42.5702637,30.2981304 L42.4124496,30.4462551 L42.3709196,30.4767107 C42.1272769,30.6248354 37.3540937,34.0012489 32.7387247,39.5095512 L32.7387247,39.4998608 L32.6639706,39.5939962 C31.8513667,40.5754956 31.0595277,41.5874506 30.2884537,42.6741602 L30.2773791,42.7170748 L30.18186,42.8222849 C28.4514427,45.2282737 10.9396195,70.910612 26.1908255,102.767122 C27.436726,105.173111 28.8418249,107.68431 30.4365775,110.278569 L30.849109,110.976278 L31.4720592,111.978543 L31.5343542,112.083753 C29.3595657,115.555686 27.415961,118.963939 25.7478387,122.212993 C13.147632,149.78496 24.9767648,172.535259 29.1048483,179.203641 L29.9299113,180.247436 L30.3202934,180.934071 C30.4573425,181.219245 34.1327489,187.623218 42.7917571,193.34194 L42.9827952,193.4693 L42.9938699,193.531595 C45.1368187,195.051604 58.1066425,203.69406 76.3770807,203.69406 L76.3992301,203.69406 C85.2908064,203.69406 94.1200877,201.668766 102.73895,197.594643 C105.167072,196.318279 107.744702,194.861949 110.437231,193.22704 L112.677083,191.833006 C118.242105,195.642719 122.678895,198.322808 125.930695,199.810977 C132.563039,202.395546 139.407185,203.79927 146.377306,204 L149.397923,204 C163.613647,203.608231 174.385149,198.048708 179.180481,195.104209 L179.223396,195.156815 L181.567073,193.521905 C181.694432,193.448535 182.919567,192.55148 184.672134,191.052236 L184.692899,191.042546 C186.520219,189.460242 188.908195,187.200993 191.177119,184.469684 L191.199268,184.500139 L192.191835,183.18086 C192.287354,183.07565 192.382873,182.94829 192.467318,182.822315 L193.596934,181.345221 C193.722909,181.165256 194.325094,180.354031 195.170922,178.991837 L195.201377,178.950307 L195.201377,178.950307 Z"
+                              id="Icon"></path>
+                    </g>
+                </g>
+            </svg>
+            <span class="mdl-layout-title">VPN Address Fixer</span>
+        </div>
+    </header>
+    <main class="mdl-layout__content">
+        <div class="page-content mdl-grid">
+            <div class="mdl-card dash-card mdl-shadow--4dp login mdl-cell--2-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                <form class="loginForm">
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">Login</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input loginEmail" id="loginEmail" type="email">
+                            <label class="mdl-textfield__label" for="loginEmail">Email</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input loginPassword" id="loginPassword" type="password">
+                            <label class="mdl-textfield__label" for="loginPassword">Password</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input loginOtp" type="text" id="loginOtp"
+                                   pattern="-?[0-9]*(\.[0-9]+)?" maxlength="6">
+                            <label class="mdl-textfield__label" for="loginOtp">2FA Token</label>
+                            <span class="mdl-textfield__error">Input is not a number!</span>
+                        </div>
+                        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect loginSubmit"
+                                type="submit">Login
+                        </button>
+                        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect logoutButton"
+                                type="button" disabled>Logout
+                        </button>
+                        <br>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
+                            <input type="text" value="" class="mdl-textfield__input companySelect" id="companySelect"
+                                   readonly>
+                            <input type="hidden" value="" name="companySelect" class="companySelect__value">
+                            <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+                            <label for="companySelect" class="mdl-textfield__label">Company</label>
+                            <ul
+                                    class="mdl-menu mdl-menu--bottom-left mdl-js-menu companySelectDropdown">
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="mdl-card dash-card mdl-shadow--4dp configurator mdl-cell--9-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">Configure</h2>
+                </div>
+                <div class="mdl-card__supporting-text agentTableContainer">
+                    <table class="agentTable mdl-data-table mdl-js-data-table  mdl-shadow--2dp">
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<script defer src="https://unpkg.com/getmdl-select@2.0.1/getmdl-select.min.js"></script>
+<script defer>
+    const emailInput = document.querySelector('.loginEmail');
+    const passwordInput = document.querySelector('.loginPassword');
+    const otpInput = document.querySelector('.loginOtp');
+    const loginSubmit = document.querySelector('.loginSubmit');
+    const logoutButton = document.querySelector('.logoutButton');
+    const companySelectDropdown = document.querySelector('.companySelectDropdown');
+    const companySelect = document.querySelector('.companySelect');
+    const agentTable = document.querySelector('.agentTable');
+    const loginForm = document.querySelector('.loginForm');
+
+    // Constants
+    const discoveryEndpoint = 'https://api.ixon.net';
+    const ixApiVersion = 1;
+
+    // Replace with application id
+    const ixApiApplication = '<APPLICATION_ID_HERE>';
+    const tokenExpire = 604800;
+    const localStorageTokenName = 'token';
+
+    // Quick 'n dirty global state
+    const endpoints = {};
+    let accessToken;
+    let companies = [];
+    let selectedCompany;
+
+    /**
+     * @type {{[companyId]: []}}
+     */
+    let agents = {};
+
+    // Get current unix timestamp
+    const currentUnix = () => Math.floor(Date.now() / 1000);
+
+    // Escapes characters in an string
+    const escapeHtml = (unsafe) => {
+        return unsafe
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    };
+
+    // Template tag function used to sanitize html variables
+    function sanitize(strings, ...values) {
+        return values.reduce(
+            (prev, cur, i) => prev + escapeHtml(cur) + strings[i + 1],
+            strings[0]
+        );
+    }
+
+    // Wraps fetch and adds ixon headers and adds fields
+    const ixonFetch = async (input, init = {}, fields = []) => {
+
+        init.headers = {
+            ...init.headers,
+            'IXapi-Version': ixApiVersion,
+            'IXapi-Application': ixApiApplication,
+            'Content-Type': 'application/json',
+            ...accessToken && {
+                'Authorization': `Bearer ${accessToken}`
+            },
+            ...selectedCompany && {
+                'IXapi-Company': selectedCompany,
+            }
+        };
+
+        if (fields.length > 0) {
+            input += `?fields=${fields.join(',')}`
+        }
+
+        return await fetch(input, init)
+    };
+
+    // Discovery for ixapi
+    const discovery = async () => {
+        const res = await ixonFetch(discoveryEndpoint);
+        const resObj = await res.json();
+        for (const link of resObj.links) {
+            endpoints[link.rel] = link.href;
+        }
+    };
+
+    // Login to ixapi
+    const login = async (email, otpToken, password) => {
+        const initObj = {
+            method: 'POST',
+            headers: {
+                Authorization: `Basic ${btoa(`${email}:${otpToken}:${password}`)}`,
+            },
+            body: JSON.stringify({
+                expiresIn: tokenExpire,
+            }),
+        };
+
+        let res;
+        try {
+            res = await ixonFetch(endpoints['AccessTokenList'], initObj, ['secretId']);
+        } catch (e) {
+            throw 'Could not login';
+        }
+
+        const resObj = await res.json();
+
+        if (!res.ok) {
+            console.error(res);
+            if (res.status === 401) {
+                throw 'Incorrect credentials';
+            } else {
+                throw 'Unknown error';
+            }
+        }
+
+        return resObj.data['secretId'];
+    };
+
+    const postLogin = async () => {
+        emailInput.value = '';
+        emailInput.disabled = true;
+        passwordInput.value = '';
+        passwordInput.disabled = true;
+        otpInput.value = '';
+        otpInput.disabled = true;
+        loginSubmit.disabled = true;
+        logoutButton.disabled = false;
+
+        await fetchCompanies();
+    };
+
+    // Fetch all companies of user
+    const fetchCompanies = async () => {
+        let res;
+        try {
+            res = await ixonFetch(endpoints['CompanyList'], {}, ['publicId', 'name']);
+        } catch (e) {
+            throw 'Could not fetch companies';
+        }
+
+        companies = [];
+        const companyRes = await res.json();
+        companies.push(...companyRes.data);
+        companySelectDropdown.innerHTML = '';
+
+        // Create option elements
+        for (const company of companies) {
+            const option = sanitize`
+                <li class="mdl-menu__item" data-val="${company.publicId}">
+                    ${company.name}
+                </li>
+            `;
+            companySelectDropdown.innerHTML += option;
+            getmdlSelect.init('.getmdl-select')
+        }
+
+        // Remove disabled state
+        companySelect.disabled = false;
+    };
+
+    const resetAgentTable = () => {
+        agentTable.innerHTML = '<tr><th>Name</th><th>LAN Address</th><th>VPN Address</th></tr>';
+    };
+
+    const onVpnPatchSubmitted = async (e) => {
+        e.preventDefault();
+
+        const agentId = e.srcElement.dataset.agent;
+
+        try {
+            await patchVpnIp(agentId, e.target[0].value);
+        } catch (e) {
+            alert(e)
+        }
+    };
+
+    const unregisterSubmitHandlers = () => {
+        const submits = document.querySelectorAll('.vpnPatchForm');
+
+        for (const submit of submits) {
+            submit.removeEventListener('submit', onVpnPatchSubmitted)
+        }
+    };
+
+    const registerSubmitHandlers = () => {
+        const submits = document.querySelectorAll('.vpnPatchForm');
+
+        for (const submit of submits) {
+            submit.addEventListener('submit', onVpnPatchSubmitted)
+        }
+    };
+
+    const setAgentTable = async (companyId) => {``
+        const ags = agents[companyId];
+
+        unregisterSubmitHandlers();
+
+        // Hacky reset
+        resetAgentTable();
+
+        // Create table rows
+        for (const agent of ags) {
+            const row = document.createElement('tr');
+
+            const currAddress = agent.fixedVpnAddress || 'None';
+            const lanAddress = (agent.config.routerLan && agent.config.routerLan.ipAddress) || 'None';
+
+            row.innerHTML += sanitize`
+                <td>${agent.name}</td>
+                <td>${lanAddress}</td>
+                <td>
+                    <form class="vpnPatchForm" data-agent="${agent.publicId}">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="txt" value=${currAddress}>
+                            <label class="mdl-textfield__label">VPN Address</label>
+                        </div>
+                        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                        type="submit">Set</button>
+                    </form>
+                </td>`;
+            agentTable.appendChild(row);
+        }
+
+        componentHandler.upgradeAllRegistered();
+        registerSubmitHandlers();
+    };
+
+    // Fetch all agents of user
+    const fetchAgents = async () => {
+        let res;
+        try {
+            res = await ixonFetch(endpoints['AgentList'], {}, ['publicId',
+                'name', 'fixedVpnAddress', 'config.routerLan.ipAddress']);
+        } catch (e) {
+            throw 'Could not retrieve agents';
+        }
+
+        const agentRes = await res.json();
+
+        agents[selectedCompany] = [
+            ...agentRes.data,
+        ];
+
+        await setAgentTable(selectedCompany)
+    };
+
+    const patchVpnIp = async (selectedAgent, newIp) => {
+        const endpoint = endpoints['Agent'].replace('{publicId}', selectedAgent);
+
+        const init = {
+            method: 'PATCH',
+            body: JSON.stringify({
+                'fixedVpnAddress': newIp,
+            })
+        };
+
+        let res;
+        try {
+            res = await ixonFetch(endpoint, init);
+        } catch (e) {
+            throw 'Could not fetch agents';
+        }
+
+        const errRes = await res.json();
+        if (!res.ok) {
+            throw JSON.stringify(errRes)
+        }
+
+        alert(`Successfully set VPN Address to "${newIp}"`)
+    };
+
+    (async () => {
+        if (ixApiApplication === '<APPLICATION_ID_HERE>') {
+            alert('VPN Adress fixer needs an application id in order to function.');
+            return
+        }
+
+        await discovery();
+
+        const storedAccessToken = localStorage.getItem(localStorageTokenName);
+
+        if (storedAccessToken) {
+
+            /**
+             * @type {{expire: number, token: string}}
+             */
+            const decodedAccessToken = JSON.parse(storedAccessToken);
+
+            if (decodedAccessToken.expire < currentUnix()) {
+                // Expired
+                localStorage.removeItem(localStorageTokenName)
+            } else {
+                // Not expired
+                accessToken = decodedAccessToken.token;
+                await postLogin()
+            }
+        }
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = e.target[0].value;
+            const password = e.target[1].value;
+            const otpToken = e.target[2].value;
+
+            try {
+                accessToken = await login(email, otpToken, password);
+                const expires = currentUnix() + tokenExpire;
+                localStorage.setItem('token', JSON.stringify({expire: expires, token: accessToken}));
+            } catch (e) {
+                alert(e);
+                return;
+            }
+
+            await postLogin();
+        });
+
+        logoutButton.addEventListener('click', () => {
+            localStorage.removeItem('token');
+            location.reload();
+        });
+
+        companySelect.addEventListener('change', async () => {
+            selectedCompany = document.querySelector('.companySelect__value').value;
+            if (!agents[selectedCompany] || agents[selectedCompany].length === 0) {
+                await fetchAgents(selectedCompany)
+            } else {
+                await setAgentTable(selectedCompany)
+            }
+        });
+    })()
+</script>
+</body>
+
+</html>
