@@ -1,4 +1,4 @@
-# VPN Adress Fixer
+# VPN Address Fixer
 
 This is a small web-based tool for changing a device's fixed VPN address.
 
