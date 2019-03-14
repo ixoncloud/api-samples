@@ -1,0 +1,15 @@
+<h3>
+  Choose your Tag
+</h3>
+<div *ngIf="allTags; else Loading">
+  <li *ngFor="let d of allTags.data" >
+    <button class="btn btn-primary mt-2" (click)="onTag(d)">{{ d.name }}</button>
+  </li>
+</div>
+<ng-template #Loading>
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <br>
+</ng-template>
+<button class="btn btn-warning mt-3" [routerLink]="['/login']">Log uit</button>

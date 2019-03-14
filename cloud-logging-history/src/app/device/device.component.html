@@ -1,0 +1,15 @@
+<h3>
+  Choose your device
+</h3>
+<div *ngIf="allDevices; else Loading">
+  <li *ngFor="let t of allDevices.data">
+    <button class="btn btn-primary mt-2" [routerLink]="['/tag']" (click)="onDevice(t.publicId)">{{ t.name }}</button>
+  </li>
+</div>
+<ng-template #Loading>
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <br>
+</ng-template>
+<button class="btn btn-warning mt-3" [routerLink]="['/login']">Log uit</button>
