@@ -1,0 +1,10 @@
+<h3>
+    This is your data
+</h3>
+  <div *ngIf="data; else Loading">
+    <li *ngFor="let d of data.data.data">Data: <b>{{ d.b }}</b> Time: {{ d.time }}</li>
+  </div>
+  <button [routerLink]="['/login']">Log uit</button>
+  <ng-template #Loading>
+    loading...
+  </ng-template>

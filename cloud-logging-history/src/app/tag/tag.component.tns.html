@@ -1,0 +1,9 @@
+<ActionBar title=" Device Tags " ></ActionBar>
+<stackLayout *ngIf="allTags; else Loading" class="list-group-item">
+       <Button text="{{ t.name }}" class="btn btn-primary" [nsRouterLink]="['/data']" *ngFor="let t of allTags.data" height="50" (tap)="onTag(t)"></Button>
+       <button text="Back" class="btn" [nsRouterLink]="['/device']"></button>
+</stackLayout>
+
+    <ng-template #Loading>
+           <label text="Loading..." class="h3"></label>
+    </ng-template>

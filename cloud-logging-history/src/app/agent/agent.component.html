@@ -1,0 +1,15 @@
+<h3>
+  Choose your Agent
+</h3>
+<div *ngIf="allAgents; else Loading">
+  <li *ngFor="let t of allAgents.data" >
+    <button class="btn btn-primary mt-2" [routerLink]="['/device']" (click)="onAgent(t.publicId)">{{ t.name }}</button>
+  </li>
+</div>
+<ng-template #Loading>
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <br>
+</ng-template>
+<button class="btn btn-warning mt-3" [routerLink]="['/device']">Log uit</button>

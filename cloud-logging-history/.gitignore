@@ -1,0 +1,65 @@
+# Folders
+dist
+hooks
+libs
+node_modules
+package
+platforms
+!tns-core-modules/platforms
+reports
+tags
+
+# Files
+package-lock.json
+.DS_Store
+.nsbuildinfo
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+
+# IDE - VSCode
+.vscode
+
+# Appium files
+e2e/**/*.trace/
+e2e/**/test-results.xml
+
+# Webpack configuration files
+webpack.config.js
+tsconfig.esm.json
+tsconfig.tns.json
+
+# Generated files
+*.map
+*.tgz
+.baseDir.ts
+.sublime-grunt.cache
+tscommand*.tmp.txt
+.tscache
+
+# Other
+*.js
+!tests/hooks/**/*.*
+!gruntfile.js
+!js-libs/**/*.*
+!css/**/*.*
+!css-value/**/*.*
+!fetch/**/*.*
+!apps/TelerikNEXT/lib/**/*.*
+!build/**/*.*
+.vs/
+
+.baseDir.ts
+.ctags-exclude
+
+TestRunResult.txt
+.testsapprun
+
+tns-core-modules.base.d.ts
+tns-core-modules.d.ts
+tns-core-modules.es6.d.ts
