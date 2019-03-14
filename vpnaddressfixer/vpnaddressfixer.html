@@ -15,25 +15,31 @@
         }
 
         .page-content {
-            height: 90vh;
+            height: 80vh;
+            justify-content: center;
         }
 
         .dash-card {
             margin: 20px;
+            height: 100%;
         }
 
         .mdl-card__supporting-text {
-            height: 100%;
             width: 100%;
+            height: 100%;
         }
 
         .agentTable {
             width: 100%;
         }
 
+        .agentTable th {
+            text-align: center;
+        }
+
         .agentTableContainer {
             width: 100%;
-            overflow-y: auto;
+            overflow: auto;
         }
 
         * {
@@ -108,6 +114,15 @@
                 </div>
                 <div class="mdl-card__supporting-text agentTableContainer">
                     <table class="agentTable mdl-data-table mdl-js-data-table  mdl-shadow--2dp">
+                    <thead class="agentTableHeader">
+                        <tr>
+                            <th>Name</th>
+                            <th>LAN Address</th>
+                            <th>VPN Address</th>
+                            <th>BACnet-BBMD</th>
+                        </tr>
+                    </thead>
+                    <tbody class="agentTableBody"></tbody>
                     </table>
                 </div>
             </div>
@@ -124,7 +139,8 @@
     const logoutButton = document.querySelector('.logoutButton');
     const companySelectDropdown = document.querySelector('.companySelectDropdown');
     const companySelect = document.querySelector('.companySelect');
-    const agentTable = document.querySelector('.agentTable');
+    const agentTableHeader = document.querySelector('.agentTableHeader');
+    const agentTableBody = document.querySelector('.agentTableBody');
     const loginForm = document.querySelector('.loginForm');
 
     // Constants
@@ -276,7 +292,7 @@
     };
 
     const resetAgentTable = () => {
-        agentTable.innerHTML = '<tr><th>Name</th><th>LAN Address</th><th>VPN Address</th></tr>';
+        agentTableBody.innerHTML = '';
     };
 
     const onVpnPatchSubmitted = async (e) => {
@@ -291,19 +307,49 @@
         }
     };
 
-    const unregisterSubmitHandlers = () => {
-        const submits = document.querySelectorAll('.vpnPatchForm');
+    const onBbmdPatchSubmitted = async (e) => {
+        e.preventDefault();
 
-        for (const submit of submits) {
+        const agentId = e.srcElement.dataset.agent;
+
+        let cleanedInput = e.target[0].value.replace(/\s/g, '').split(',')
+
+        // Splitting an empty string will result in an array with an empty string
+        // This will replace that with an empty array because '' is an invalid IP
+        if (cleanedInput[0] === '') {
+            cleanedInput = null;
+        }
+
+        try {
+            await patchBbmd(agentId, cleanedInput);
+        } catch (e) {
+            alert(e)
+        }
+    }
+
+    const unregisterSubmitHandlers = () => {
+        const vpnPatchForms = document.querySelectorAll('.vpnPatchForm');
+        const bbmdPatchForms = document.querySelectorAll('.bbmdPatchForm');
+
+        for (const submit of vpnPatchForms) {
             submit.removeEventListener('submit', onVpnPatchSubmitted)
+        }
+
+        for(const submit of bbmdPatchForms) {
+            submit.removeEventListener('submit', onBbmdPatchSubmitted)            
         }
     };
 
     const registerSubmitHandlers = () => {
-        const submits = document.querySelectorAll('.vpnPatchForm');
+        const vpnPatchForms = document.querySelectorAll('.vpnPatchForm');
+        const bbmdPatchForms = document.querySelectorAll('.bbmdPatchForm');
 
-        for (const submit of submits) {
+        for (const submit of vpnPatchForms) {
             submit.addEventListener('submit', onVpnPatchSubmitted)
+        }
+
+        for(const submit of bbmdPatchForms) {
+            submit.addEventListener('submit', onBbmdPatchSubmitted)
         }
     };
 
@@ -319,8 +365,13 @@
         for (const agent of ags) {
             const row = document.createElement('tr');
 
-            const currAddress = agent.fixedVpnAddress || 'None';
-            const lanAddress = (agent.config.routerLan && agent.config.routerLan.ipAddress) || 'None';
+            const routerLanConfig = {
+                ...agent.config.routerLan
+            }
+
+            const currVpnAddress = agent.fixedVpnAddress || '';
+            const currBbbmdAddresses = routerLanConfig.bacnetBbmd || [];
+            const lanAddress = routerLanConfig.ipAddress || 'None';
 
             row.innerHTML += sanitize`
                 <td>${agent.name}</td>
@@ -328,14 +379,25 @@
                 <td>
                     <form class="vpnPatchForm" data-agent="${agent.publicId}">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="txt" value=${currAddress}>
+                            <input class="mdl-textfield__input" type="txt" value=${currVpnAddress}>
                             <label class="mdl-textfield__label">VPN Address</label>
                         </div>
                         <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
                         type="submit">Set</button>
                     </form>
-                </td>`;
-            agentTable.appendChild(row);
+                </td>
+                <td>
+                    <form class="bbmdPatchForm" data-agent="${agent.publicId}">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="txt" value="${currBbbmdAddresses.join(', ')}">
+                            <label class="mdl-textfield__label">BACnet-BBMD</label>
+                        </div>
+                        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                        type="submit">Set</button>
+                    </form>
+                </td>
+            `;
+            agentTableBody.appendChild(row);
         }
 
         componentHandler.upgradeAllRegistered();
@@ -347,7 +409,7 @@
         let res;
         try {
             res = await ixonFetch(endpoints['AgentList'], {}, ['publicId',
-                'name', 'fixedVpnAddress', 'config.routerLan.ipAddress']);
+                'name', 'fixedVpnAddress', 'config.routerLan.*']);
         } catch (e) {
             throw 'Could not retrieve agents';
         }
@@ -375,7 +437,7 @@
         try {
             res = await ixonFetch(endpoint, init);
         } catch (e) {
-            throw 'Could not fetch agents';
+            throw 'Could not change fixed vpn address';
         }
 
         const errRes = await res.json();
@@ -385,6 +447,34 @@
 
         alert(`Successfully set VPN Address to "${newIp}"`)
     };
+
+    const patchBbmd = async (selectedAgent, bbmds) => {
+        const endpoint = endpoints['AgentConfiguration']
+            .replace('{publicId}', selectedAgent)
+            .replace('{configType}', 'router-lan');
+
+        const init = {
+            method: 'PATCH',
+            body: JSON.stringify({
+                bacnetBbmd: bbmds,
+            })
+        };
+
+        let res;
+        try {
+            res = await ixonFetch(endpoint, init);
+        } catch (e) {
+            throw 'Could not set BACnet-BBmd.';
+        }
+
+        const errRes = await res.json();
+
+        if (!res.ok) {
+            throw JSON.stringify(errRes)
+        }
+
+        alert(`Successfully set BACnet-BBMD.`)
+    }
 
     (async () => {
         if (ixApiApplication === '<APPLICATION_ID_HERE>') {
@@ -398,18 +488,24 @@
 
         if (storedAccessToken) {
 
-            /**
-             * @type {{expire: number, token: string}}
-             */
-            const decodedAccessToken = JSON.parse(storedAccessToken);
-
-            if (decodedAccessToken.expire < currentUnix()) {
-                // Expired
+            if (!storedAccessToken.startsWith("{")) {
+                // Handle old access token storage
+                alert('Please login again.')
                 localStorage.removeItem(localStorageTokenName)
             } else {
-                // Not expired
-                accessToken = decodedAccessToken.token;
-                await postLogin()
+                /**
+                * @type {{expire: number, token: string}}
+                */
+                const decodedAccessToken = JSON.parse(storedAccessToken);
+
+                if (decodedAccessToken.expire < currentUnix()) {
+                    // Expired
+                    localStorage.removeItem(localStorageTokenName)
+                } else {
+                    // Not expired
+                    accessToken = decodedAccessToken.token;
+                    await postLogin()
+                }
             }
         }
 
