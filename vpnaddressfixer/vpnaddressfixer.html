@@ -27,6 +27,7 @@
         .mdl-card__supporting-text {
             width: 100%;
             height: 100%;
+            overflow: auto
         }
 
         .agentTable {
@@ -40,6 +41,16 @@
         .agentTableContainer {
             width: 100%;
             overflow: auto;
+        }
+
+        .mdl-menu__container .mdl-menu {
+            overflow-y: auto;
+            max-height: 150px !important;
+        }
+
+        .mdl-menu.mdl-menu--top-left {
+            bottom: auto;
+            top: 0;
         }
 
         * {
@@ -69,33 +80,34 @@
     <main class="mdl-layout__content">
         <div class="page-content mdl-grid">
             <div class="mdl-card dash-card mdl-shadow--4dp login mdl-cell--2-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
-                <form class="loginForm">
                     <div class="mdl-card__title">
                         <h2 class="mdl-card__title-text">Login</h2>
                     </div>
                     <div class="mdl-card__supporting-text">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input loginEmail" id="loginEmail" type="email">
-                            <label class="mdl-textfield__label" for="loginEmail">Email</label>
-                        </div>
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input loginPassword" id="loginPassword" type="password">
-                            <label class="mdl-textfield__label" for="loginPassword">Password</label>
-                        </div>
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input loginOtp" type="text" id="loginOtp"
-                                   pattern="-?[0-9]*(\.[0-9]+)?" maxlength="6">
-                            <label class="mdl-textfield__label" for="loginOtp">2FA Token</label>
-                            <span class="mdl-textfield__error">Input is not a number!</span>
-                        </div>
-                        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect loginSubmit"
-                                type="submit">Login
-                        </button>
-                        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect logoutButton"
-                                type="button" disabled>Logout
-                        </button>
+                        <form class="loginForm">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input loginEmail" id="loginEmail" type="email">
+                                <label class="mdl-textfield__label" for="loginEmail">Email</label>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input loginPassword" id="loginPassword" type="password">
+                                <label class="mdl-textfield__label" for="loginPassword">Password</label>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input loginOtp" type="text" id="loginOtp"
+                                    pattern="-?[0-9]*(\.[0-9]+)?" maxlength="6">
+                                <label class="mdl-textfield__label" for="loginOtp">2FA Token</label>
+                                <span class="mdl-textfield__error">Input is not a number!</span>
+                            </div>
+                            <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect loginSubmit"
+                                    type="submit">Login
+                            </button>
+                            <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect logoutButton"
+                                    type="button" disabled>Logout
+                            </button>
+                        </form>
                         <br>
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
                             <input type="text" value="" class="mdl-textfield__input companySelect" id="companySelect"
                                    readonly>
                             <input type="hidden" value="" name="companySelect" class="companySelect__value">
@@ -106,7 +118,6 @@
                             </ul>
                         </div>
                     </div>
-                </form>
             </div>
             <div class="mdl-card dash-card mdl-shadow--4dp configurator mdl-cell--9-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
                 <div class="mdl-card__title">
