@@ -25,6 +25,7 @@ export class CompanyComponent implements OnInit {
   onCompany(companyId){
     console.log(companyId);
     this.ixonService.chosenCompany = companyId
+    // Request the token now the company is set
     this.ixonService.getToken()
   }
 }

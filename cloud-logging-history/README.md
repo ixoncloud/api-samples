@@ -15,9 +15,15 @@ You can do so by contacting [IXON Support](https://www.ixon.cloud/contact).
 
 When you got the application id, you need to set it in /src/app/_services/ixon.service.
 
+In the folder "withWidget" is the application with a widget build in. I worked my last hours on this widget but to keep the application simple I kept it apart. It is build in a different structure so you can't run it in a browser like this one.
+
 These are just sample data
 ## Mobile
 ![](MobileExample.gif)
 ## Website
 ![](WebExample.gif)
 
+#Feature options
+1. IOS should be fairly simple as nativesript has lots of support for it.
+2. Generate a bitMap to show a graph on the widget.
+3. Keep the user logged in, Simple but no priority.

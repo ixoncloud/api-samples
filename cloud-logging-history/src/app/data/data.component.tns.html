@@ -1,4 +1,4 @@
-<ActionBar title=" Data " ></ActionBar>
+<ActionBar title=" Data Average of last 24 hours" ></ActionBar>
 <stackLayout *ngIf="data; else Loading" class="list-group-item">
        <label *ngFor="let d of data.data.data" text="{{ d.b }}" class="h3"></label>        
 </stackLayout>
@@ -8,3 +8,5 @@
 <ng-template #Loading>
        <label text="Loading..." class="h3"></label>
 </ng-template>
+
+  <!-- @todo A graph to show data better would be nice but the request needs to be changed  -->

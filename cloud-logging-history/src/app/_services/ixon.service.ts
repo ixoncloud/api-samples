@@ -30,8 +30,7 @@ export class IxonService {
     '1',
     // Application id Must be requested at https://www.ixon.cloud/support but is neccesary to make requests!
     // PASTE YOURE APPLICATION ID HERE
-    ''
-
+    ""
     // Autorization header will be set after login
     // Company id will also be set after login
   ]

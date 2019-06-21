@@ -1,0 +1,13 @@
+/* Add mobile styles for the component here.  */
+.header{
+    margin: 2rem;
+}
+.data{
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    color: blue;
+    text-align: center;
+}
