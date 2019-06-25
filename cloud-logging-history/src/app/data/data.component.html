@@ -1,5 +1,5 @@
 <h3>
-    This is your data
+    This is your data, the average of the last 24 hours.
 </h3>
   <div *ngIf="data; else Loading">
     <li *ngFor="let d of data.data.data">Data: <b>{{ d.b }}</b> Time: {{ d.time }}</li>
@@ -8,3 +8,5 @@
   <ng-template #Loading>
     loading...
   </ng-template>
+
+  <!-- @todo A graph to show data better would be nice but the request needs to be changed  -->

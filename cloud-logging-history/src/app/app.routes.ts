@@ -13,6 +13,7 @@ export const routes: Routes = [
       path: 'login',
       component: LoginComponent,
   },
+  // everything is protected by the authgaurd
   {
     path: '',
     canActivate: [AuthGuard],

@@ -17,6 +17,7 @@ export class AuthGuard implements CanActivate {
   }
 
   checkLogin(): boolean {
+    // Securety at its best
     if (this.ixonService.isLoggedIn) { return true; }
 
     // Navigate to the login page with extras

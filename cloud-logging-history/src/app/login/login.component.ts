@@ -35,12 +35,14 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.invalid){
       return
     }
+    // Encrypted user will be send to the server
     this.set_authorization_header('Basic', base64.encode(this.loginForm.value.email + ':' + (this.loginForm.value.otpassword ? this.loginForm.value.otpassword : '') + ':' + this.loginForm.value.password));
     
     this.ixonService.makeRequest("access/tokens")
       .toPromise().then(data =>{
         let test: any = data
         if (test.status === "success") {
+          //user is logged in
           this.ixonService.isLoggedIn = true
           this.router.navigate(['company']);
         }

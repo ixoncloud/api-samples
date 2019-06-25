@@ -1,0 +1,11 @@
+<ActionBar title=" Data " ></ActionBar>
+<stackLayout *ngIf="data; else Loading" class="list-group-item">
+       <label text="The average of last 24 hours" class="h2 header"></label>        
+       <label *ngFor="let d of data.data.data" text="{{ d.b }}" class="h1 data"></label>        
+</stackLayout>
+
+<!-- <button text="Back" height="50" [nsRouterLink]="['/login']"></button> -->
+
+<ng-template #Loading>
+       <label text="Loading..." class="h3"></label>
+</ng-template>
